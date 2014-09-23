@@ -291,7 +291,7 @@
                                (when did-change (did-change value))))))))))))
 
 
-(defn clock [date hours scale on-click]
+(defn clock [date hours? scale on-click]
   (let [radius 70
         nub 10
         blob (* 1.4 nub)
@@ -300,11 +300,11 @@
         half-diam (* js/Math.PI radius)
         half-slice (/ half-diam 12)
         selected (if date
-                   (if hours
+                   (if hours?
                      (let [h (mod (time/hour date) 12)]
                        (if (= 0 h) 12 h))
                      (time/minute date))
-                   (if hours 12 0))
+                   (if hours? 12 0))
         am? (if date (< (time/hour date) 12) true)
         margin 3
         scale (or scale 1)]
@@ -321,11 +321,11 @@
         (concat
           (map
             (fn [n]
-              (let [value (if hours
+              (let [value (if hours?
                             (if (= 0 n) 12 n)
                             (* 5 n))
                     on-click (when on-click
-                               #(on-click (if hours
+                               #(on-click (if hours?
                                             (at-hour date
                                                      (if am?
                                                        n (+ 12 n)))
@@ -356,7 +356,7 @@
                                  :className "clock-line"
                                  :onClick on-click}))))
             (range 12))
-          (when (and (not hours) (not= 0 (mod selected 5)))
+          (when (and (not hours?) (not= 0 (mod selected 5)))
             [(dom/g
                #js {:transform (str (svg/translate nub)
                                     (svg/rotate (* selected 6) radius radius)
@@ -365,7 +365,7 @@
                (dom/circle #js {:r (/ nub 2) :className "clock-nub"})
                (dom/line #js {:y1 (/ nub 2) :y2 (- radius nub)
                               :className "clock-line"}))])))
-      (when hours
+      (when hours?
         (dom/g
           #js {:transform (str (svg/scale scale) (svg/translate (- size blob) blob))
                :className (str "clock-meridiem"
@@ -378,7 +378,7 @@
             #js {:textAnchor "middle"
                  :y text-shift}
             "AM")))
-      (when hours
+      (when hours?
         (dom/g
           #js {:transform (str (svg/scale scale) (svg/translate (+ margin (- size blob)) (- size blob)))
                :className (str "clock-meridiem"
