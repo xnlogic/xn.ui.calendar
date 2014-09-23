@@ -1,4 +1,4 @@
-(defproject xn.ui.calendar "1.0.0"
+(defproject xn.ui.calendar "1.0.0-SNAPSHOT"
   :description "Calendar picker with date-range and time abilities"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"

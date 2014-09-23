@@ -1,2 +1,4 @@
 resources/public/js/compiled
 target
+pom.xml
+src/xn/common
