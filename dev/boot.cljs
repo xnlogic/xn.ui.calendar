@@ -13,13 +13,7 @@
   (om/component
     (dom/div
       nil
-      (cal/calendar {:active-date (:date cur)}))))
-
-(defn show-cal-control [cur owner]
-  (om/component
-    (dom/div
-      nil
-      (om/build cal/calendar-component cur {:opts {:key :date}}))))
+      (scal/calendar {:active-date (:date cur)}))))
 
 (defn show-cal-control [cur owner]
   (om/component
