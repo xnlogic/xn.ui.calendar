@@ -3,7 +3,7 @@
             [om.dom :as dom :include-macros true]
             [cljs-time.core :as time]
             [xn.ui.calendar :as cal]
-            [xn.common.popup :as p]
+            [xn.library.popup :as p]
             [figwheel.client :as fw]))
 
 (enable-console-print!)
@@ -13,7 +13,7 @@
   (om/component
     (dom/div
       nil
-      (scal/calendar {:active-date (:date cur)}))))
+      (cal/calendar {:active-date (:date cur)}))))
 
 (defn show-cal-control [cur owner]
   (om/component

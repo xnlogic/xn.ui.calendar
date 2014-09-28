@@ -3,12 +3,13 @@
             [om.dom :as dom :include-macros true]
             [clojure.string :as str]
             [cljs-time.core :as time]
+            [cljs-time.local :as ltime]
             [cljs-time.format :as ftime]
-            [xn.common.om :refer [swap-state!]]
-            [xn.common.date-utils :refer [date+time at-hour at-minute on-or-before?]]
-            [xn.common.svg :as svg]
-            [xn.common.element :refer [table]]
-            [xn.common.popup :refer [popup position-popup]]))
+            [xn.library.om :refer [swap-state!]]
+            [xn.library.date-utils :refer [date+time at-hour at-minute on-or-before?]]
+            [xn.library.svg :as svg]
+            [xn.library.element :refer [table]]
+            [xn.library.popup :refer [popup position-popup]]))
 
 (defn month-name [month]
   (str (ftime/months (dec (time/month month)))
@@ -58,7 +59,7 @@
           (date-button
             #(swap-state! owner update-in [:visible] not)
             (if value
-              (ftime/unparse formatter value)
+              (ftime/unparse-local formatter value)
               "no date selected"))
           (popup owner
                  (when visible
@@ -99,7 +100,7 @@
         (date-button
           #(swap-state! owner update-in [:visible] not)
           (if value
-            (ftime/unparse formatter value)
+            (ftime/unparse-local formatter value)
             "no date selected"))
         (popup owner
           (when visible
@@ -142,7 +143,7 @@
           #js {:className "calendar-control"}
           (date-button
             #(swap-state! owner update-in [:visible] not)
-            (str/join " - " (map (fn [d] (if d (ftime/unparse formatter d) "no date"))
+            (str/join " - " (map (fn [d] (if d (ftime/unparse-local formatter d) "no date"))
                                  [start-date end-date])))
           (popup
             owner
@@ -210,7 +211,7 @@
 
 
 (defn calendar [{:keys [month active-date cursor-date start-date end-date on-change-month on-click]}]
-  (let [month (or month active-date start-date (time/now))
+  (let [month (or month active-date start-date (ltime/local-now))
         month (time/first-day-of-the-month month)
         [month active-date cursor-date start-date end-date]
         (map (fn [d] (when d (time/at-midnight d)))
@@ -271,7 +272,7 @@
           (date-button
             #(swap-state! owner update-in [:visible] not)
             (if value
-              (ftime/unparse formatter value)
+              (ftime/unparse-local formatter value)
               "no time selected"))
           (popup owner
                  (when visible

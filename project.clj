@@ -5,10 +5,11 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2342"]
-                 [figwheel "0.1.4-SNAPSHOT"]
-                 [com.andrewmcveigh/cljs-time "0.1.6"]
-                 [om "0.7.3"]]
+                 [org.clojure/clojurescript "0.0-2356"]
+                 [com.andrewmcveigh/cljs-time "0.2.1"]
+                 [xn.library.cljs "0.1.0"]
+                 [om "0.7.3"]
+                 [figwheel "0.1.4-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-figwheel "0.1.4-SNAPSHOT"]]
