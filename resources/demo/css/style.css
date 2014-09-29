@@ -1,0 +1,292 @@
+.calendar-popup {
+  z-index: 3000;
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  border: 1px solid rgba(0,0,0,.15);
+}
+
+.calendar-popup .clock,
+.calendar-popup .calendar {
+  float: left;
+  margin: 4px;
+}
+.calendar-popup.clock-popup .clock {
+  margin-top: 4px;
+}
+.calendar-popup .clock {
+  float: left;
+}
+
+.calendar.cal-single {
+  border: none;
+}
+
+.daterangepicker_start_input label,
+.daterangepicker_end_input label {
+  color: #333;
+  display: block;
+  font-size: 11px;
+  font-weight: normal;
+  height: 20px;
+  line-height: 20px;
+  margin-bottom: 2px;
+  text-shadow: #fff 1px 1px 0px;
+  text-transform: uppercase;
+  width: 74px;
+}
+
+.daterangepicker .ranges .input-mini {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #555;
+  display: block;
+  font-size: 11px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  margin: 0 0 10px 0;
+  padding: 0 6px;
+  width: 74px;
+}
+
+.calendar {
+  display: inline-block;
+  padding: 4px;
+  background: #fff;
+}
+
+.calendar-popup {
+  background: #fff;
+  padding: 4px;
+  margin-top: 1px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.daterangepicker.opensleft:before {
+  position: absolute;
+  top: -7px;
+  right: 9px;
+  display: inline-block;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-left: 7px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.daterangepicker.opensleft:after {
+  position: absolute;
+  top: -6px;
+  right: 10px;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #fff;
+  border-left: 6px solid transparent;
+  content: '';
+}
+
+.daterangepicker.opensright:before {
+  position: absolute;
+  top: -7px;
+  left: 9px;
+  display: inline-block;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-left: 7px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.daterangepicker.opensright:after {
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #fff;
+  border-left: 6px solid transparent;
+  content: '';
+}
+
+.daterangepicker table {
+  width: 100%;
+  margin: 0;
+}
+
+.calendar th, .calendar td {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.calendar td, .calendar th {
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+td.cal-off {
+  color: #999;
+}
+
+td.cal-disabled {
+  color: #999;
+}
+
+td.cal-available:hover, th.cal-available:hover {
+  background: #eee;
+}
+
+td.cal-in-range {
+  background: #ebf4f8;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+td.cal-available + td.cal-range-start {
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
+}
+
+td.cal-in-range + td.cal-range-end{
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+td.cal-range-start.cal-range-end{
+  -webkit-border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+  border-radius: 4px !important;
+}
+
+td.cal-active, td.cal-active:hover {
+  background-color: #357ebd;
+  border-color: #3071a9;
+  color: #fff;
+}
+
+select.cal-monthselect, select.cal-yearselect {
+  font-size: 12px;
+  padding: 1px;
+  height: auto;
+  margin: 0;
+  cursor: default;
+}
+
+select.cal-monthselect {
+  margin-right: 2%;
+  width: 56%;
+}
+
+select.cal-yearselect {
+  width: 40%;
+}
+
+select.cal-hourselect, select.cal-minuteselect, select.cal-ampmselect {
+  width: 50px;
+  margin-bottom: 0;
+}
+
+.daterangepicker_start_input {
+  float: left;
+}
+
+.daterangepicker_end_input {
+  float: left; 
+  padding-left: 11px
+}
+
+th.cal-month {
+  width: auto;
+}
+
+.clock-face {
+  fill: white;
+  stroke: black;
+  stroke-width: 2px;
+  cursor: pointer;
+}
+.clock {
+  cursor: pointer;
+  background-color: white;
+}
+.clock-nub {
+  fill: transparent;
+}
+
+.clock-active .clock-nub {
+  fill: rgba(53, 126, 189, 1);
+  stroke: #3071a9;
+}
+.clock-active .clock-number {
+  fill: white;
+}
+.clock-active .clock-line {
+  stroke: rgba(53, 126, 189, 1);
+  stroke-width: 4px;
+  stroke-linecap: round;
+}
+.clock-meridiem.clock-active circle {
+  fill: rgba(53, 126, 189, 1);
+}
+.clock-meridiem.clock-active text {
+  fill: white;
+}
+
+.clock-wedge:hover .clock-nub {
+  fill: rgba(131, 176, 215, 1);
+}
+.clock-wedge:hover .clock-number {
+  fill: white;
+}
+.clock-wedge:hover .clock-line {
+  stroke: rgba(131, 176, 215, 1);
+  stroke-width: 4px;
+  stroke-linecap: round;
+}
+.clock-meridiem:hover circle {
+  fill: rgba(131, 176, 215, 1);
+}
+.clock-meridiem:hover text {
+  fill: white
+}
+
+.clock-wedge:active .clock-nub {
+  fill: rgba(91, 150, 201, 1);
+  stroke: #3071a9;
+}
+.clock-wedge:active .clock-number {
+  fill: white;
+}
+.clock-wedge:active .clock-line {
+  stroke: rgba(91, 150, 201, 1);
+  stroke-width: 4px;
+  stroke-linecap: round;
+}
+.clock-meridiem circle {
+  fill: white;
+}
+.calendar-popup {
+  display: flex;
+  flex-direction: row;
+}
+.cal-datetime {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 4px;
+  padding: 4px;
+}
+
+
