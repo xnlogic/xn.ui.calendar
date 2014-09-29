@@ -23,11 +23,12 @@
                         :output-dir "resources/public/js/compiled/out"
                         :optimizations :none
                         :source-map true}}
-            {:id "min"
-             :source-paths ["src"]
-             :compiler {:output-to "resources/public/js/xn.ui.calendar.min.js"
+            {:id "demo"
+             :source-paths ["src" "dev"]
+             :compiler {:output-to "resources/demo/xn.ui.calendar.min.js"
+                        :source-map "resources/demo/xn.ui.calendar.map"
+                        :output-dir "resources/demo/xn.ui.calendar.src"
                         :optimizations :advanced
-                        :pretty-print false
                         :preamble ["react/react.min.js"]
                         :externs ["react/externs/react.js"]}}]}
   :figwheel

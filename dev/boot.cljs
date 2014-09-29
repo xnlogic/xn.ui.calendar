@@ -1,47 +1,29 @@
 (ns dev.boot
   (:require [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]
-            [cljs-time.core :as time]
+            [cljs-time.local :as ltime]
             [xn.ui.calendar :as cal]
             [xn.library.popup :as p]
             [figwheel.client :as fw]))
 
 (enable-console-print!)
-(fw/watch-and-reload)
-
-(defn show-cal [cur owner]
-  (om/component
-    (dom/div
-      nil
-      (cal/calendar {:active-date (:date cur)}))))
-
-(defn show-cal-control [cur owner]
-  (om/component
-    (dom/div
-      nil
-      (om/build cal/calendar-component cur {:opts {:key :date}}))))
-
-(defn show-clock [cur owner]
-  (om/component
-    (dom/div
-      nil
-      (cal/clock (:date cur) false 1 nil))))
-
-(defn show-datetime-control [cur owner]
-  (om/component
-    (dom/div
-      nil
-      (om/build cal/datetime-component cur {:opts {:key :date}}))))
-
-(defn show-date-range-control [cur owner]
-  (om/component
-    (dom/div
-      nil
-      (om/build cal/date-range-component cur {:opts {:start :date :end :end-date :time? true}}))))
 
 (p/init-popups (js/document.getElementById "popups"))
 
-(om/root show-date-range-control
-         {:date (time/now)
-          :end-date (time/now)}
+(defn demo [cur owner]
+  (om/component
+    (dom/div
+      nil
+      (dom/h1 nil "Dropdown controls in various arrangements")
+      (om/build cal/calendar-component cur {:opts {:key :date}})
+      (om/build cal/datetime-component cur {:opts {:key :date}})
+      (om/build cal/date-range-component cur {:opts {:start :date :end :end-date :time? true}})
+      (dom/h2 nil "Static versions with no events registered (easy to compose into your own controls, etc)")
+      (cal/calendar {:active-date (:date cur)})
+      (cal/clock (:date cur) true 0.4 nil)
+      (cal/clock (:date cur) false 0.4 nil))))
+
+(om/root demo
+         {:date (ltime/local-now)
+          :end-date (ltime/local-now)}
          {:target (js/document.getElementById "contents")})

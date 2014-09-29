@@ -3,3 +3,5 @@ www
 target
 pom.xml
 src/xn/common
+resources/demo/*.src
+resources/demo/*.map

@@ -6,7 +6,7 @@
             [cljs-time.local :as ltime]
             [cljs-time.format :as ftime]
             [xn.library.om :refer [swap-state!]]
-            [xn.library.date-utils :refer [date+time at-hour at-minute on-or-before?]]
+            [xn.library.date-utils :refer [date+time at-hour at-minute on-or-before? should-be-local]]
             [xn.library.svg :as svg]
             [xn.library.element :refer [table]]
             [xn.library.popup :refer [popup position-popup]]))
@@ -212,7 +212,7 @@
 
 (defn calendar [{:keys [month active-date cursor-date start-date end-date on-change-month on-click]}]
   (let [month (or month active-date start-date (ltime/local-now))
-        month (time/first-day-of-the-month month)
+        month (should-be-local (time/first-day-of-the-month month))
         [month active-date cursor-date start-date end-date]
         (map (fn [d] (when d (time/at-midnight d)))
              [month active-date cursor-date start-date end-date])
@@ -225,14 +225,14 @@
       (table
         #js {:className "table-condensed"}
         [[[{:className "cal-available"
-            :onClick #(on-change-month (time/first-day-of-the-month
-                                         (time/minus month (time/days 1))))}
+            :onClick #(on-change-month (should-be-local (time/first-day-of-the-month
+                                         (time/minus month (time/days 1)))))}
            (dom/i #js {:className "fa fa-arrow-left icon-arrow-left glyphicon glyphicon-arrow-left" })]
           [{:colSpan 5
             :className "month"} (month-name month)]
           [{:className "cal-available"
-            :onClick #(on-change-month (time/first-day-of-the-month
-                                         (time/plus month (time/days 31))))}
+            :onClick #(on-change-month (should-be-local (time/first-day-of-the-month
+                                         (time/plus month (time/days 31)))))}
            (dom/i #js {:className "fa fa-arrow-right icon-arrow-right glyphicon glyphicon-arrow-right"})]]
          ["Su" "Mo" "Tu" "We" "Th" "Fr" "Sa"]]
         (map
