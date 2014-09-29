@@ -25,7 +25,7 @@
                         :source-map true}}
             {:id "min"
              :source-paths ["src"]
-             :compiler {:output-to "www/xn/ui/calendar.min.js"
+             :compiler {:output-to "resources/public/js/xn.ui.calendar.min.js"
                         :optimizations :advanced
                         :pretty-print false
                         :preamble ["react/react.min.js"]
