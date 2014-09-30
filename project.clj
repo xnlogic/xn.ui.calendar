@@ -6,9 +6,8 @@
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2356"]
-                 [com.andrewmcveigh/cljs-time "0.2.1"]
+                 ; xn.library pulls in current versions of om and cljs-time, etc.
                  [xn.library.cljs "0.1.0"]
-                 [om "0.7.3"]
                  [figwheel "0.1.4-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
