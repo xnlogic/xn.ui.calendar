@@ -9,7 +9,7 @@
             [xn.library.date-utils :refer [date+time at-hour at-minute on-or-before? should-be-local]]
             [xn.library.svg :as svg]
             [xn.library.element :refer [table]]
-            [xn.library.popup :refer [popup position-popup]]))
+            [xn.library.popup :refer [popup position-popup remove-popup]]))
 
 (defn month-name [month]
   (str (ftime/months (dec (time/month month)))
@@ -52,6 +52,8 @@
   (let [value (key cur)
         formatter (or formatter datetime-format)]
     (reify
+      om/IWillUnmount
+      (will-unmount [_] (remove-popup owner))
       om/IRenderState
       (render-state [_ {:keys [month visible]}]
         (dom/div
@@ -93,28 +95,30 @@
   (let [value (key cur)
         formatter (or formatter date-format)]
     (reify
-    om/IRenderState
-    (render-state [_ {:keys [month visible]}]
-      (dom/div
-        #js {:className "calendar-control"}
-        (date-button
-          #(swap-state! owner update-in [:visible] not)
-          (if value
-            (ftime/unparse-local formatter value)
-            "no date selected"))
-        (popup owner
-          (when visible
-            (dom/div
-              #js {:ref "popup"
-                   :className "calendar-popup"
-                   :style (position-popup owner "date-button" "popup")}
-              (calendar {:month month
-                         :active-date value
-                         :on-change-month #(swap-state! owner assoc :month %)
-                         :on-click #(let [value (will-change (date+time % value))]
-                                      (when (om/cursor? cur)
-                                        (om/update! cur key value))
-                                      (when did-change (did-change value)))})))))))))
+      om/IWillUnmount
+      (will-unmount [_] (remove-popup owner))
+      om/IRenderState
+      (render-state [_ {:keys [month visible]}]
+        (dom/div
+          #js {:className "calendar-control"}
+          (date-button
+            #(swap-state! owner update-in [:visible] not)
+            (if value
+              (ftime/unparse-local formatter value)
+              "no date selected"))
+          (popup owner
+            (when visible
+              (dom/div
+                #js {:ref "popup"
+                     :className "calendar-popup"
+                     :style (position-popup owner "date-button" "popup")}
+                (calendar {:month month
+                           :active-date value
+                           :on-change-month #(swap-state! owner assoc :month %)
+                           :on-click #(let [value (will-change (date+time % value))]
+                                        (when (om/cursor? cur)
+                                          (om/update! cur key value))
+                                        (when did-change (did-change value)))})))))))))
 
 
 (defn date-range-component [cur owner {:keys [className start end did-change will-change formatter time?]}]
@@ -137,6 +141,8 @@
         end-date (end cur)
         formatter (or formatter date-format)]
     (reify
+      om/IWillUnmount
+      (will-unmount [_] (remove-popup owner))
       om/IRenderState
       (render-state [_ {:keys [start-month end-month visible]}]
         (dom/div
@@ -265,6 +271,8 @@
     (reify
       om/IInitState
       (init-state [_] {:hours? true})
+      om/IWillUnmount
+      (will-unmount [_] (remove-popup owner))
       om/IRenderState
       (render-state [_ {:keys [visible hours?]}]
         (dom/div
